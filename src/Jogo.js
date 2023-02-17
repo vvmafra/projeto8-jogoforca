@@ -1,20 +1,18 @@
 import { useState } from "react"
-import images from "./images"
 
 
-export default function Jogo() {
-
-
-
-
+export default function Jogo(props) {
+    
 
     return(
         <>
         <div className="game">
-            <img src={images[0]}></img>
-            <button class="choose" disabled>Escolher Palavra</button>
+            <img src={props.images[props.countingError]}></img>
+            <button class="choose" onClick={props.startGame}>Escolher Palavra</button>
         </div>
-        
+        <div className="wordSelected">
+        {props.wordAppeared.map((au) => (<div className="letter-game"> <div class="each-letter">{ au }</div> </div>))}
+        </div>
         </>
     )
 }

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Encode+Sans:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;0,700;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
 
 .game img{
     width: 400px;
@@ -36,7 +36,6 @@
 }
 
 .box-letter {
-    color: #798A9F;
     text-align: center;
     padding-top: 11px;
     padding-bottom: 11px;
@@ -44,9 +43,38 @@
     font-size: 16px;
     width: 40px;
     height: 40px;
-    background-color: #9FAAB5;
     border: 1px solid #7AA7C7;
     border-radius: 3px;
     box-sizing: border-box;
     margin: 6px;
+}
+
+.disable {
+    background-color: #9FAAB5;
+    color: #798A9F;
+}
+
+.able {
+    background-color: #E1ECF4;
+    color: #39739D;
+}
+
+.wordSelected {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 80px;
+}
+
+.letter-game {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+}
+
+.each-letter {
+    margin: 10px;
 }
