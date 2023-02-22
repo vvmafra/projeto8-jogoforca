@@ -11,45 +11,85 @@ import image5 from "./images/forca5.png"
 import image6 from "./images/forca6.png"
 
 function App() {
-  const images = [ image0, image1, image2, image3, image4, image5, image6]
+  let letterX = "";
+  let gameStart = "";
+  let underlineArray = [];
+  const images = [image0, image1, image2, image3, image4, image5, image6]
+  const [classImage, setClassImage] = useState("none")
+  const [disableFindWord, setDisableFindWord] = useState(false)
   const [triedLetter, setTriedLetter] = useState([])
-  const [disableLetter, setDisableLetter] = useState("disable")
+  const [classDisableLetter, setClassDisableLetter] = useState("disable")
   const [randomWord, setRandomWord] = useState([])
   const [countingError, setCountingError] = useState(0)
   const [wordAppeared, setWordAppeared] = useState([])
+  const [disable, setDisable] = useState(true)
 
+  console.log(triedLetter)
+  console.log(randomWord)
+  console.log(countingError)
 
-  function ableDisableLetter() {
-    setDisableLetter("able")
-}
-
-  function addWordTried(alphabet){
-    setTriedLetter([...triedLetter, alphabet])
+  function showImage() {
+    setClassImage("")
   }
 
-  function chooseWord(){
+  function functionDisableFindWord(){
+    setDisableFindWord(true)
+  }
+  
+  function functionDisableLetter() {
+    if (gameStart === 1)  {
+      setClassDisableLetter("")
+    }
+    setClassDisableLetter("able")
+  }
+
+  function disableLetter(){
+    setDisable(false)
+  }
+
+
+  function chooseWord() {
     const newRandomWord = palavras[Math.floor(Math.random() * palavras.length)];
     setRandomWord(newRandomWord.split(''))
-    const underlineArray = Array(newRandomWord.length).fill('_')
+    underlineArray = Array(newRandomWord.length).fill('_')
     setWordAppeared(underlineArray)
   }
 
+  function clickWord(alphabet) {
+    console.log(alphabet)
+    letterX = alphabet.toLowerCase();
+    const newWordTried = [...triedLetter]
+    setTriedLetter([...newWordTried, alphabet])
+    for (let i = 0; i < randomWord.length; i++) {
+      if (randomWord[i].includes(letterX)) {
+        wordAppeared.splice(i, 1, randomWord[i])
+        
+      } else if (!randomWord.includes(letterX)){
+        increaseError()
+      }
+    }
+  }
 
-  function increaseError(){
-    const sumError = countingError+1
+
+  function increaseError() {
+    const sumError = countingError + 1
     setCountingError(sumError)
   }
 
 
   function startGame() {
-    ableDisableLetter()
+    functionDisableLetter()
     chooseWord()
+    disableLetter()
+    functionDisableFindWord()
+    showImage()
+    gameStart = 1;
   }
 
   return (
     <>
-    <Jogo wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} randomWord={randomWord} countingError={countingError}/>
-    <Letras triedLetter={triedLetter} addWordTried={addWordTried} disableLetter={disableLetter}/>
+      <Jogo clickWord={clickWord} classImage={classImage} disableFindWord={disableFindWord} wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} countingError={countingError} />
+      <Letras clickWord={clickWord} disable={disable} triedLetter={triedLetter} classDisableLetter={classDisableLetter} />
     </>
   );
 }
