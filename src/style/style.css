@@ -22,7 +22,6 @@
 }
 
 .container-letters {
-    background-color: gray;
     margin-top: 70px;
     display: flex;
     justify-content: center;
@@ -58,7 +57,6 @@
 }
 
 .wordSelected {
-    background-color: red;
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -113,7 +111,7 @@
     }
 
     .wordSelected {
-        right: 80px;
+        left: 50px;
         top: 550px;
     }
     
