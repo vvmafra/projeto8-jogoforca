@@ -66,6 +66,7 @@ function App() {
   }
 
   function clickWord(alphabet) {
+    let sumError = countingError
     letterX = alphabet.toLowerCase();
 
     const newWordTried = [...triedLetter]
@@ -81,16 +82,17 @@ function App() {
       }
 
       else if (!randomWord.includes(letterX)) {
-        increaseError()
+        sumError = increaseError()
       }
     }
 
-    checkFinishGame()
+    checkFinishGame(sumError)
   }
 
   function increaseError() {
-    const sumError = countingError + 1
-    setCountingError(sumError)
+    const sumError = countingError + 1;
+    setCountingError(sumError);
+    return sumError;
   }
 
   function checkFinishGame() {
