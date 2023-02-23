@@ -124,10 +124,6 @@ function App() {
     setWordAppeared(randomWord)
   }
 
-  function restartGame() {
-
-  }
-
   return (
     <>
       <Jogo clickWord={clickWord} classGreen={classGreen} classImage={classImage} disableFindWord={disableFindWord} wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} countingError={countingError} />
