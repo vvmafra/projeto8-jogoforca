@@ -14,7 +14,7 @@ function App() {
   let letterX = "";
   let underlineArray = [];
   const images = [image0, image1, image2, image3, image4, image5, image6]
-  const [classImage, setClassImage] = useState("none")
+  const [classImage, setClassImage] = useState(0)
   const [disableFindWord, setDisableFindWord] = useState(false)
   const [triedLetter, setTriedLetter] = useState([])
   const [classDisableLetter, setClassDisableLetter] = useState("disable")
@@ -74,6 +74,7 @@ function App() {
   }
 
   function clickWord(alphabet) {
+    if (gameStart !== 0) {
     let sumError = countingError
     letterX = alphabet.toLowerCase();
 
@@ -92,9 +93,11 @@ function App() {
       else if (!randomWord.includes(letterX)) {
         sumError = increaseError()
       }
+      
     }
 
     checkFinishGame(sumError)
+  }
   }
 
   function increaseError() {
@@ -105,7 +108,7 @@ function App() {
 
   function checkFinishGame(countingError) {
     if (countingError >= 6) {
-      alert("perdeu")
+      setGameStart(2)
       loseGame()
     }
     else if (countingError < 6 && !wordAppeared.includes("_")) {
@@ -121,6 +124,7 @@ function App() {
 
   function loseGame() {
     setClassGreen("red")
+    setDisableFindWord(false)
     setWordAppeared(randomWord)
   }
 
