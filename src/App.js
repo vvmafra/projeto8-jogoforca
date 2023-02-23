@@ -12,7 +12,6 @@ import image6 from "./images/forca6.png"
 
 function App() {
   let letterX = "";
-  let gameStart = "";
   let underlineArray = [];
   const images = [image0, image1, image2, image3, image4, image5, image6]
   const [classImage, setClassImage] = useState("none")
@@ -23,73 +22,91 @@ function App() {
   const [countingError, setCountingError] = useState(0)
   const [wordAppeared, setWordAppeared] = useState([])
   const [disable, setDisable] = useState(true)
+  const [gameStart, setGameStart] = useState(0)
 
-  console.log(triedLetter)
-  console.log(randomWord)
-  console.log(countingError)
+  console.log("tentativas", triedLetter)
+  console.log("palavra aleatoria criada", randomWord)
+  console.log("contagem de erros", countingError)
 
-  function showImage() {
-    setClassImage("")
-  }
-
-  function functionDisableFindWord(){
-    setDisableFindWord(true)
-  }
   
-  function functionDisableLetter() {
-    if (gameStart === 1)  {
-      setClassDisableLetter("")
-    }
-    setClassDisableLetter("able")
-  }
-
-  function disableLetter(){
-    setDisable(false)
-  }
-
-
-  function chooseWord() {
-    const newRandomWord = palavras[Math.floor(Math.random() * palavras.length)];
-    setRandomWord(newRandomWord.split(''))
-    underlineArray = Array(newRandomWord.length).fill('_')
-    setWordAppeared(underlineArray)
-  }
-
-  function clickWord(alphabet) {
-    console.log(alphabet)
-    letterX = alphabet.toLowerCase();
-    const newWordTried = [...triedLetter]
-    setTriedLetter([...newWordTried, alphabet])
-    for (let i = 0; i < randomWord.length; i++) {
-      if (randomWord[i].includes(letterX)) {
-        wordAppeared.splice(i, 1, randomWord[i])
-        
-      } else if (!randomWord.includes(letterX)){
-        increaseError()
-      }
-    }
-  }
-
-
-  function increaseError() {
-    const sumError = countingError + 1
-    setCountingError(sumError)
-  }
-
-
   function startGame() {
     functionDisableLetter()
     chooseWord()
     disableLetter()
     functionDisableFindWord()
     showImage()
-    gameStart = 1;
+    setGameStart(1)
   }
+
+  function functionDisableLetter() {
+    if (gameStart === 1) {
+      setClassDisableLetter("")
+    }
+    setClassDisableLetter("able")
+  }
+
+  function chooseWord() {
+    const newRandomWord = palavras[Math.floor(Math.random() * palavras.length)];
+    setRandomWord(newRandomWord.split(''))
+
+    underlineArray = Array(newRandomWord.length).fill('_')
+    setWordAppeared(underlineArray)
+  }
+
+  function disableLetter() {
+    setDisable(false)
+  }
+
+  function functionDisableFindWord() {
+    setDisableFindWord(true)
+  }
+
+  function showImage() {
+    setClassImage("")
+  }
+
+  function clickWord(alphabet) {
+    letterX = alphabet.toLowerCase();
+
+    const newWordTried = [...triedLetter]
+    setTriedLetter([...newWordTried, alphabet])
+
+    const lengthRandom = randomWord.length
+
+    for (let i = 0; i < lengthRandom; i++) {
+      const pos = randomWord[i]
+
+      if (pos.includes(letterX)) {
+        wordAppeared.splice(i, 1, pos)
+      }
+
+      else if (!randomWord.includes(letterX)) {
+        increaseError()
+      }
+    }
+
+    checkFinishGame()
+  }
+
+  function increaseError() {
+    const sumError = countingError + 1
+    setCountingError(sumError)
+  }
+
+  function checkFinishGame() {
+    if (countingError >= 6) {
+      alert("perdeu")
+    }
+    else if (countingError < 6 && !wordAppeared.includes("_")) {
+      alert("venceu")
+    }
+  }
+
 
   return (
     <>
       <Jogo clickWord={clickWord} classImage={classImage} disableFindWord={disableFindWord} wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} countingError={countingError} />
-      <Letras clickWord={clickWord} disable={disable} triedLetter={triedLetter} classDisableLetter={classDisableLetter} />
+      <Letras clickWord={clickWord} disable={disable} triedLetter={triedLetter} classDisableLetter={classDisableLetter} gameStart={gameStart} countingError={countingError} />
     </>
   );
 }
