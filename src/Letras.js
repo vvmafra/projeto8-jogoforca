@@ -13,7 +13,7 @@ export default function Letras(props) {
                     <button className={`box-letter ${props.triedLetter.includes(alphabet) && "disable"} ${props.classDisableLetter}`}
                     key={alphabet}
                     onClick={() => {props.clickWord(alphabet)}} 
-                    disabled={((props.triedLetter.includes(alphabet)) || props.countingError === 6) ? true : false}> 
+                    disabled={((props.triedLetter.includes(alphabet)) || props.countingError === 6 || props.gameStart === 2) ? true : false}> 
                     {alphabet} </button>))}
                     
                 </div>

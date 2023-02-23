@@ -77,6 +77,14 @@
     margin: 10px;
 }
 
+.green {
+    color:#27AE60
+}
+
+.red {
+    color:#FF0000
+}
+
 .none {
     display: none;
 }

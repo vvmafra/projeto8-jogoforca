@@ -23,23 +23,35 @@ function App() {
   const [wordAppeared, setWordAppeared] = useState([])
   const [disable, setDisable] = useState(true)
   const [gameStart, setGameStart] = useState(0)
+  const [classGreen, setClassGreen] = useState("")
 
   console.log("tentativas", triedLetter)
   console.log("palavra aleatoria criada", randomWord)
   console.log("contagem de erros", countingError)
 
-  
+
   function startGame() {
-    functionDisableLetter()
-    chooseWord()
-    disableLetter()
-    functionDisableFindWord()
-    showImage()
-    setGameStart(1)
+    if (gameStart === 0) {
+      functionDisableLetter()
+      chooseWord()
+      disableLetter()
+      functionDisableFindWord()
+      setClassImage("")
+      setGameStart(1)
+
+    } else {
+
+      setGameStart(3)
+      setClassGreen("")
+      chooseWord()
+      setClassDisableLetter("able")
+      setTriedLetter([])
+      setCountingError(0)
+    }
   }
 
   function functionDisableLetter() {
-    if (gameStart === 1) {
+    if (gameStart === 1 || gameStart === 2) {
       setClassDisableLetter("")
     }
     setClassDisableLetter("able")
@@ -59,10 +71,6 @@ function App() {
 
   function functionDisableFindWord() {
     setDisableFindWord(true)
-  }
-
-  function showImage() {
-    setClassImage("")
   }
 
   function clickWord(alphabet) {
@@ -95,19 +103,34 @@ function App() {
     return sumError;
   }
 
-  function checkFinishGame() {
+  function checkFinishGame(countingError) {
     if (countingError >= 6) {
       alert("perdeu")
+      loseGame()
     }
     else if (countingError < 6 && !wordAppeared.includes("_")) {
-      alert("venceu")
+      setGameStart(2)
+      winGame()
     }
   }
 
+  function winGame() {
+    setClassGreen("green")
+    setDisableFindWord(false)
+  }
+
+  function loseGame() {
+    setClassGreen("red")
+    setWordAppeared(randomWord)
+  }
+
+  function restartGame() {
+
+  }
 
   return (
     <>
-      <Jogo clickWord={clickWord} classImage={classImage} disableFindWord={disableFindWord} wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} countingError={countingError} />
+      <Jogo clickWord={clickWord} classGreen={classGreen} classImage={classImage} disableFindWord={disableFindWord} wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} countingError={countingError} />
       <Letras clickWord={clickWord} disable={disable} triedLetter={triedLetter} classDisableLetter={classDisableLetter} gameStart={gameStart} countingError={countingError} />
     </>
   );
