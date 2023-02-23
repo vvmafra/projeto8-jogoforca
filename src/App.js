@@ -25,11 +25,6 @@ function App() {
   const [gameStart, setGameStart] = useState(0)
   const [classGreen, setClassGreen] = useState("")
 
-  console.log("tentativas", triedLetter)
-  console.log("palavra aleatoria criada", randomWord)
-  console.log("contagem de erros", countingError)
-
-
   function startGame() {
     if (gameStart === 0) {
       functionDisableLetter()
