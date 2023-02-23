@@ -131,7 +131,7 @@ function App() {
   return (
     <>
       <Jogo clickWord={clickWord} classGreen={classGreen} classImage={classImage} disableFindWord={disableFindWord} wordAppeared={wordAppeared} randomWord={randomWord} images={images} startGame={startGame} triedLetter={triedLetter} countingError={countingError} />
-      <Letras clickWord={clickWord} disable={disable} triedLetter={triedLetter} classDisableLetter={classDisableLetter} gameStart={gameStart} countingError={countingError} />
+      <Letras clickWord={clickWord} disable={disable} triedLetter={triedLetter} classDisableLetter={classDisableLetter} gameStart={gameStart} countingError={countingError}/>
     </>
   );
 }
