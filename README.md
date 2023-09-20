@@ -1,6 +1,9 @@
 # Jogo da Forca Project
 - Hangman game (Joga da Forca in portuguese), where the objective is to find the correct random word generated.
-- You can test accessing the deploy: https://projeto8-jogoforca-six-beta.vercel.app/
+- You can test accessing the deploy: https://projeto8-jogoforca-six-beta.vercel.app/.
+
+![Captura de tela de 2023-09-20 14-37-31](https://github.com/vvmafra/projeto8-jogoforca/assets/121946512/c7f70191-0002-492c-816a-eef199247607)
+
 
 ## About
 How to play the game:
